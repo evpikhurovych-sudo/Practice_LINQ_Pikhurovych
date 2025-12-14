@@ -51,19 +51,21 @@ namespace Practice_Linq
         // Запит 1
         static void Query1(List<FootballGame> games)
         {
-            //Query 1: Вивести всі матчі, які відбулися в Україні у 2012 році.
+            // Query 1: Вивести всі матчі, які відбулися в Україні у 2012 році.
 
-            var selectedGames = games;
-                
+            var selectedGames = games
+                .Where(g => g.Country == "Ukraine" && g.Date.Year == 2012);
 
             // Результат
             Console.WriteLine("\n======================== QUERY 1 ========================");
 
-            //foreach
-           
-
+            foreach (var g in selectedGames)
+            {
+                Console.WriteLine($"{g.Date.ToShortDateString()} | {g.Home_team} - {g.Away_team} | {g.Home_score}:{g.Away_score}");
+            }
         }
 
+        
         // Запит 2
         static void Query2(List<FootballGame> games)
         {
