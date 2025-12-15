@@ -87,19 +87,27 @@ namespace Practice_Linq
             }
         }
 
-        // Запит 3
+
         static void Query3(List<FootballGame> games)
         {
-            //Query 3: Вивести всі домашні матчі збірної Франції за 2021 рік, де вона зіграла у нічию.
+            // Query 3: Вивести всі домашні матчі збірної Франції за 2021 рік, де вона зіграла у нічию.
 
-            var selectedGames = games; // допиши запит
-
+            var selectedGames = games
+                .Where(g =>
+                    g.Home_team == "France" &&
+                    g.Date.Year == 2021 &&
+                    g.Home_score == g.Away_score
+                );
 
             // Результат
             Console.WriteLine("\n======================== QUERY 3 ========================");
 
-            //foreach
-
+            foreach (var g in selectedGames)
+            {
+                Console.WriteLine(
+                    $"{g.Date:yyyy-MM-dd} | {g.Home_team} {g.Home_score}:{g.Away_score} {g.Away_team}"
+                );
+            }
         }
 
         // Запит 4
