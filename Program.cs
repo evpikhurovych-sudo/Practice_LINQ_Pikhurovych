@@ -396,20 +396,29 @@ namespace Practice_Linq
         }
 
 
-        // Запит 15 (**)
+        // Запит 15
         static void Query15(List<FootballGame> games)
         {
-            //Query 15: Вивести команди відсортовані за алфавітом, які за вечь час зіграли всього 1 гру.
-            //Вихідні команди повині мати властивості: Team - назва команди, Count - кількість ігор.  
+            // Query 15: Команди, які за весь час зіграли лише 1 матч.
 
-            var selectedGames = games; // допиши запит
-
+            var selectedGames = games
+                .SelectMany(g => new[] { g.Home_team, g.Away_team })
+                .GroupBy(t => t)
+                .Where(g => g.Count() == 1)
+                .OrderBy(g => g.Key)
+                .Select(g => new
+                {
+                    Team = g.Key,
+                    Count = g.Count()
+                });
 
             // Результат
             Console.WriteLine("\n======================== QUERY 15 ========================");
 
-            //foreach
-
+            foreach (var g in selectedGames)
+            {
+                Console.WriteLine($"{g.Team}");
+            }
         }
 
     }
