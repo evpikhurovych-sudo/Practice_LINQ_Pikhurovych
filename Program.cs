@@ -110,6 +110,7 @@ namespace Practice_Linq
             }
         }
 
+
         // Запит 4
         static void Query4(List<FootballGame> games)
         {
